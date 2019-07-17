@@ -5,7 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 /**
- * 
  * @ClassName: NotRepeatAttack
  * @Description: 防止重复提交注解
  * @author: huchenghao

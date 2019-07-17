@@ -1,10 +1,7 @@
 package com.yrj.annotation;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
-
 /**
- * 
  * @ClassName: Nullable
  * @Description: 标注参数、属性、方法可为 Null
  * @author: huchenghao

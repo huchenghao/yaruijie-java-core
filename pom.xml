@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.yrj</groupId>
-	<artifactId>yaruijie</artifactId>
+	<artifactId>yaruijie-java-core</artifactId>
 	<version>0.0.1</version>
 	<name>yaruijie-java-core</name>
 	<description>Demo project for Spring Boot</description>

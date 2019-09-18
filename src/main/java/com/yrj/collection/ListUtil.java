@@ -427,8 +427,6 @@ public class ListUtil {
 
 		return result;
 	}
-
-	
 	/**
 	 * 
 	 * @Title: disjoint

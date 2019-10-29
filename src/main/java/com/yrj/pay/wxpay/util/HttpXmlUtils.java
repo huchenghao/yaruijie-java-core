@@ -177,6 +177,78 @@ public class HttpXmlUtils {
         return "";
     }
 
+    public static String xmlInfoJSAPI(Unifiedorder unifiedorder){
+        if(unifiedorder!=null){
+            StringBuffer bf = new StringBuffer();
+            bf.append("<xml>");
+
+            bf.append("<appid><![CDATA[");
+            bf.append(unifiedorder.getAppid());
+            bf.append("]]></appid>");
+
+            bf.append("<mch_id><![CDATA[");
+            bf.append(unifiedorder.getMch_id());
+            bf.append("]]></mch_id>");
+
+            bf.append("<nonce_str><![CDATA[");
+            bf.append(unifiedorder.getNonce_str());
+            bf.append("]]></nonce_str>");
+
+            bf.append("<sign><![CDATA[");
+            bf.append(unifiedorder.getSign());
+            bf.append("]]></sign>");
+
+            bf.append("<body><![CDATA[");
+            bf.append(unifiedorder.getBody());
+            bf.append("]]></body>");
+
+            bf.append("<detail><![CDATA[");
+            bf.append(unifiedorder.getDetail());
+            bf.append("]]></detail>");
+
+            bf.append("<attach><![CDATA[");
+            bf.append(unifiedorder.getAttach());
+            bf.append("]]></attach>");
+
+            bf.append("<out_trade_no><![CDATA[");
+            bf.append(unifiedorder.getOut_trade_no());
+            bf.append("]]></out_trade_no>");
+
+            bf.append("<total_fee><![CDATA[");
+            bf.append(unifiedorder.getTotal_fee());
+            bf.append("]]></total_fee>");
+
+            bf.append("<spbill_create_ip><![CDATA[");
+            bf.append(unifiedorder.getSpbill_create_ip());
+            bf.append("]]></spbill_create_ip>");
+
+            bf.append("<time_start><![CDATA[");
+            bf.append(unifiedorder.getTime_start());
+            bf.append("]]></time_start>");
+
+            bf.append("<time_expire><![CDATA[");
+            bf.append(unifiedorder.getTime_expire());
+            bf.append("]]></time_expire>");
+
+            bf.append("<notify_url><![CDATA[");
+            bf.append(unifiedorder.getNotify_url());
+            bf.append("]]></notify_url>");
+
+            bf.append("<trade_type><![CDATA[");
+            bf.append(unifiedorder.getTrade_type());
+            bf.append("]]></trade_type>");
+            
+            bf.append("<openid><![CDATA[");
+            bf.append(unifiedorder.getOpenid());
+            bf.append("]]></openid>");
+
+            bf.append("</xml>");
+            return bf.toString();
+        }
+
+        return "";
+    }
+    
     /**
      * 
     * @Title: xmlInfo 

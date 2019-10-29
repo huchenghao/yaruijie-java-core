@@ -142,10 +142,10 @@ public class WxPayCore {
 	* @Description: 微信小程序/公众号JSAPI支付
 	* @param @param wxPayMap
 	* @param @return    参数
-	* @return String    返回类型
+	* @return SortedMap<Object,Object>    返回类型
 	* @throws
 	 */
-	public static String signJSAPI(Map<String, String> wxPayMap){
+	public static SortedMap<Object,Object> signJSAPI(Map<String, String> wxPayMap){
 		String nonce_str = RandCharsUtils.getRandomString(32);
 		String time_start = RandCharsUtils.timeStart();
 		String time_expire = RandCharsUtils.timeExpire();
@@ -181,6 +181,7 @@ public class WxPayCore {
         unifiedorder.setTime_expire(time_expire);
         unifiedorder.setNotify_url(wxPayMap.get("notify_url"));
         unifiedorder.setTrade_type("JSAPI");
+        unifiedorder.setOpenid(wxPayMap.get("openid"));
 
         //构造xml参数
         String xmlInfo = HttpXmlUtils.xmlInfo(unifiedorder);
@@ -191,25 +192,18 @@ public class WxPayCore {
         //二次签名
         JSONObject jsonObject = JSONObject.parseObject(jsonStr);   //fromObject(json);
         String appid2 =(String) jsonObject.get("appid");
-        String mch_id2 =(String) jsonObject.get("mch_id");
         String nonce_str2 =(String) jsonObject.get("nonce_str");
         String prepay_id2 =(String) jsonObject.get("prepay_id");//预支付交易会话标识	
         //参数：开始生成签名
         SortedMap<Object,Object> parameters2 = new TreeMap<Object,Object>();
-        parameters2.put("appid", appid2);
-        parameters2.put("partnerid", mch_id2);
-        parameters2.put("noncestr", nonce_str2);
-        parameters2.put("package", "Sign=WXPay");
-        parameters2.put("prepayid", prepay_id2);
-        parameters2.put("timestamp", System.currentTimeMillis()/1000);
-        
+        parameters2.put("appId", appid2);
+        parameters2.put("nonceStr", nonce_str2);
+        parameters2.put("package", "prepay_id="+prepay_id2);
+        parameters2.put("signType", "MD5");
+        parameters2.put("timeStamp", (System.currentTimeMillis()/1000)+"");//必须是字符串格式返回
         String sign_result = WXSignUtils.createSign("UTF-8", parameters2,wxPayMap.get("key"));
-	    
-        JSONObject re_json_str = JSONObject.parseObject(jsonStr);
-        re_json_str.put("sign", sign_result);
-        re_json_str.put("timestamp", System.currentTimeMillis()/1000);
-        return re_json_str.toJSONString();
-       
+        parameters2.put("paySign", sign_result);
+        return parameters2;
 	}
 	
 	/** 

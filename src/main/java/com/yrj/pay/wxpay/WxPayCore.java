@@ -70,9 +70,6 @@ public class WxPayCore {
 	 * @author huchenghao
 	 * @date: 2018年12月7日 下午5:30:21
 	 */
-	
-	
-	
 	public static String sign(Map<String, String> wxPayMap){
 		String nonce_str = RandCharsUtils.getRandomString(32);
 		String time_start = RandCharsUtils.timeStart();
@@ -167,6 +164,7 @@ public class WxPayCore {
         parameters.put("notify_url", wxPayMap.get("notify_url"));
         parameters.put("trade_type", "JSAPI");
         parameters.put("spbill_create_ip", wxPayMap.get("spbill_create_ip"));
+        parameters.put("openid", wxPayMap.get("openid"));
         String sign = WXSignUtils.createSign("UTF-8", parameters,wxPayMap.get("key"));
         Unifiedorder unifiedorder = new Unifiedorder();
         unifiedorder.setAppid(wxPayMap.get("appid"));

@@ -107,7 +107,7 @@ public class WxPayCore {
         unifiedorder.setTrade_type("APP");
 
         //构造xml参数
-        String xmlInfo = HttpXmlUtils.xmlInfoJSAPI(unifiedorder);
+        String xmlInfo = HttpXmlUtils.xmlInfo(unifiedorder);
         String wxUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
         String method = "POST";
         String weixinPost = HttpXmlUtils.httpsRequest(wxUrl, method, xmlInfo).toString();
@@ -184,7 +184,7 @@ public class WxPayCore {
         unifiedorder.setOpenid(wxPayMap.get("openid"));
 
         //构造xml参数
-        String xmlInfo = HttpXmlUtils.xmlInfo(unifiedorder);
+        String xmlInfo = HttpXmlUtils.xmlInfoJSAPI(unifiedorder);
         String wxUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
         String method = "POST";
         String weixinPost = HttpXmlUtils.httpsRequest(wxUrl, method, xmlInfo).toString();

@@ -33,6 +33,14 @@ public class ResultGenerator {
         return info;
     }
     
+    public static MessageInfo genFailResultData(Object data,String message) {
+    	MessageInfo info = new MessageInfo();
+    	info.setCode(MessageCode.TIPS);
+    	info.setMsg(message);
+    	info.setResult(data);
+        return info;
+    }
+    
     public static MessageInfo gen500FailResult(String message) {
     	MessageInfo info = new MessageInfo();
     	info.setCode(MessageCode.ERROR);

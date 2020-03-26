@@ -36,6 +36,20 @@ public class DateUtil {
 
 	private static final int[] MONTH_LENGTH = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
+	/**
+	 * 
+	* @Title: getNowOfDate
+	* @Description: 当前时间
+	* @param @return    参数
+	* @return Date    返回类型
+	* @throws
+	 */
+	public static Date getNowOfDate() {
+		return new Date();
+	}
+	
+	
+	
 	//////// 日期比较 ///////////
 	/**
 	 * 是否同一天.

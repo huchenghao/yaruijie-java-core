@@ -89,6 +89,9 @@ public class SnowflakeIdWorker {
 		this.workerId = workerId;
 		this.datacenterId = datacenterId;
 	}
+	
+	public SnowflakeIdWorker() {
+	}
 
 	// ==============================Methods==========================================
 	/**

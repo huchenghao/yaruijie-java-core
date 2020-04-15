@@ -1,5 +1,7 @@
 package com.yrj.number;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Twitter_Snowflake<br>
  * SnowFlake的结构如下(每部分用-分开):<br>
@@ -18,7 +20,7 @@ package com.yrj.number;
  * @date: 2018年5月30日 下午4:33:12
  */
  
-
+@Component
 public class SnowflakeIdWorker {
 	// ==============================Fields===========================================
 	/** 开始时间截 (2015-01-01) */
@@ -164,4 +166,21 @@ public class SnowflakeIdWorker {
 		SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
 		return idWorker.nextId();
 	}
+	
+	
+	public static void main(String[] args) {
+		SnowflakeIdWorker idWorker = null;
+		for(int i =0;i<20;i++) {
+			idWorker = new SnowflakeIdWorker(0, 0);
+			System.out.println(idWorker.equals(idWorker));
+			System.out.println(idWorker.nextId());
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 }

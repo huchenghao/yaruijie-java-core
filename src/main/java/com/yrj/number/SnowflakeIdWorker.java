@@ -95,16 +95,13 @@ public class SnowflakeIdWorker {
 	 * @return SnowflakeId
 	 */
 	public synchronized long nextId() {
-		long timestamp = timeGen();
+		long timestamp = currentTimeMillis();
 
 		// 如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
 		if (timestamp < lastTimestamp) {
 			throw new RuntimeException(
-					String.format(
-							"Clock moved backwards.  Refusing to generate id for %d milliseconds",
-							lastTimestamp - timestamp));
+					String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds",lastTimestamp - timestamp));
 		}
-
 		// 如果是同一时间生成的，则进行毫秒内序列
 		if (lastTimestamp == timestamp) {
 			sequence = (sequence + 1) & sequenceMask;
@@ -113,9 +110,8 @@ public class SnowflakeIdWorker {
 				// 阻塞到下一个毫秒,获得新的时间戳
 				timestamp = tilNextMillis(lastTimestamp);
 			}
-		}
-		// 时间戳改变，毫秒内序列重置
-		else {
+		}else {
+			// 时间戳改变，毫秒内序列重置
 			sequence = 0L;
 		}
 
@@ -128,45 +124,44 @@ public class SnowflakeIdWorker {
 				| (workerId << workerIdShift) //
 				| sequence;
 	}
-
 	/**
-	 * 阻塞到下一个毫秒，直到获得新的时间戳
 	 * 
-	 * @param lastTimestamp
-	 *            上次生成ID的时间截
-	 * @return 当前时间戳
+	* @Title: tilNextMillis
+	* @Description: 阻塞到下一个毫秒，直到获得新的时间戳
+	* @param @param lastTimestamp 上次生成ID的时间截
+	* @param @return    参数
+	* @return long    返回类型
+	* @throws
 	 */
 	protected long tilNextMillis(long lastTimestamp) {
-		long timestamp = timeGen();
+		long timestamp = currentTimeMillis();
 		while (timestamp <= lastTimestamp) {
-			timestamp = timeGen();
+			timestamp = currentTimeMillis();
 		}
 		return timestamp;
 	}
-
+	
 	/**
-	 * 返回以毫秒为单位的当前时间
 	 * 
-	 * @return 当前时间(毫秒)
+	* @Title: currentTimeMillis
+	* @Description: 返回以毫秒为单位的当前时间
+	* @param @return    参数
+	* @return long    返回类型
+	* @throws
 	 */
-	protected long timeGen() {
+	protected long currentTimeMillis() {
 		return System.currentTimeMillis();
 	}
-
-	public static Long getOrderNo(){
+	/**
+	 * 
+	* @Title: orderNumber
+	* @Description: 订单号规则
+	* @param @return    参数
+	* @return Long    返回类型
+	* @throws
+	 */
+	public static Long orderNumber() {
 		SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
 		return idWorker.nextId();
 	}
-	
-	public static Long getId() {
-		SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
-		return idWorker.nextId();
-	}
-	
-	// ==============================Test=============================================
-	
-	
-	
-	
-	
 }

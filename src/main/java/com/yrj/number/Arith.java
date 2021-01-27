@@ -60,6 +60,19 @@ public class Arith {
 		}
 		return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP);
 	}
+	/**
+	 * 只舍不入
+	 * @param b1
+	 * @param b2
+	 * @param scale
+	 * @return
+	 */
+	public static BigDecimal div_give_up(BigDecimal b1, BigDecimal b2, int scale) {
+		if (scale < 0) {
+			throw new IllegalArgumentException("The scale must be a positive integer or zero");
+		}
+		return b1.divide(b2, scale, BigDecimal.ROUND_DOWN);
+	}
 
 	/**
 	 * 提供精确的小数位四舍五入处理。
